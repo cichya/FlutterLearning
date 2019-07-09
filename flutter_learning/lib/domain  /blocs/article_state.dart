@@ -2,19 +2,27 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_learning/domain%20%20/models/article.dart';
 
 abstract class ArticleState extends Equatable {
-  ArticleState([List articles = const[]]) : super(articles);
+  ArticleState([List properties = const []]) : super(properties);
 }
 
-class StartFetchingArticles extends ArticleState {
+class ArticlesUninitialized extends ArticleState {
   @override
-  String toString() => 'StartFetchingArticles';
+  String toString() => 'ArticlesUninitialized';
 }
 
-class EndFetchingArticles extends ArticleState {
+class ArticlesFetched extends ArticleState {
   final List<Article> articles;
+  final int currentPage;
 
-  EndFetchingArticles({this.articles}) : super([articles]);
+  ArticlesFetched({this.articles, this.currentPage})
+      : super([articles, currentPage]);
+
+  ArticlesFetched copyState({List<Article> articles, int currentPage}) {
+    return ArticlesFetched(
+        articles: articles ?? this.articles,
+        currentPage: currentPage ?? this.currentPage);
+  }
 
   @override
-  toString() => 'EndFetchingArticles';
+  toString() => 'ArticlesFetched';
 }
