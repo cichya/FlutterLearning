@@ -6,7 +6,7 @@ class ArticleRepository {
 
   ArticleRepository(this._dataProvider);
 
-  Future<List<Article>> getAllArticles() async {
-    return _dataProvider.articles();
+  Future<List<Article>> getAllArticles(int page) async {
+    return await _dataProvider.articles(page);
   }
 }

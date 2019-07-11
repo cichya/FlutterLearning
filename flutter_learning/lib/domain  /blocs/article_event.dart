@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ArticleEvent extends Equatable {}
+abstract class ArticleEvent extends Equatable {}
 
 class FetchArticles extends ArticleEvent {
   @override

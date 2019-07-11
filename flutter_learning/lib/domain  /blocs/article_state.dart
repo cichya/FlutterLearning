@@ -10,19 +10,31 @@ class ArticlesUninitialized extends ArticleState {
   String toString() => 'ArticlesUninitialized';
 }
 
+class ArticleError extends ArticleState {
+  @override
+  String toString() => 'ArticleError';
+}
+
 class ArticlesFetched extends ArticleState {
   final List<Article> articles;
   final int currentPage;
+  final int itemsNumber;
+  final bool isLastPage;
 
-  ArticlesFetched({this.articles, this.currentPage})
-      : super([articles, currentPage]);
+  ArticlesFetched(
+      {this.articles, this.currentPage, this.itemsNumber, this.isLastPage})
+      : super([articles, currentPage, itemsNumber, isLastPage]);
 
-  ArticlesFetched copyState({List<Article> articles, int currentPage}) {
+  ArticlesFetched copyState(
+      {List<Article> arts, int currentPg, int itemsNum, bool isLpage}) {
     return ArticlesFetched(
-        articles: articles ?? this.articles,
-        currentPage: currentPage ?? this.currentPage);
+        articles: arts ?? this.articles,
+        currentPage: currentPg ?? this.currentPage,
+        itemsNumber: itemsNum ?? this.itemsNumber,
+        isLastPage: isLpage ?? this.isLastPage);
   }
 
   @override
-  toString() => 'ArticlesFetched';
+  toString() =>
+      'ArticlesFetched (articles: ${articles.length}, currentPage: $currentPage, itemsNumber: $itemsNumber, isLastPage: $isLastPage)';
 }
