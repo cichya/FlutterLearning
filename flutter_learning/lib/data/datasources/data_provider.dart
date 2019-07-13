@@ -12,6 +12,8 @@ class DataProvider {
       result.add(Article(id: ((page - 1) * 20) + i, title: 'Article no $i', content: 'Body of article no $i'));
     }
     
+    await Future.delayed(Duration(milliseconds: 500));
+
     return Future<List<Article>>.value(result);
   }
 }
