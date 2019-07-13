@@ -39,7 +39,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
             isLastPage: false);
       }
 
-      if (event is ArticlesFetched) {
+      if (currentState is ArticlesFetched) {
         final int currentPage = (currentState as ArticlesFetched).currentPage;
 
         final articles = await _fetchArticles(currentPage + 1);
