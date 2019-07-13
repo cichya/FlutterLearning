@@ -1,5 +1,5 @@
 import 'package:flutter_learning/data/datasources/data_provider.dart';
-import 'package:flutter_learning/domain%20%20/models/article.dart';
+import 'package:flutter_learning/domain/models/article.dart';
 
 class ArticleRepository {
   final DataProvider _dataProvider;

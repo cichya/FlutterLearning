@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_learning/domain%20%20/models/article.dart';
+import 'package:flutter_learning/domain/models/article.dart';
 
 abstract class ArticleState extends Equatable {
   ArticleState([List properties = const []]) : super(properties);
