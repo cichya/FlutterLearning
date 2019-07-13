@@ -1,4 +1,4 @@
-import 'package:flutter_learning/domain%20%20/models/article.dart';
+import 'package:flutter_learning/domain/models/article.dart';
 
 class DataProvider {
   Future<List<Article>> articles(int page) async {
@@ -9,9 +9,13 @@ class DataProvider {
     var list = new List<int>.generate(20, (i) => i + 1);
 
     for(var i in list) {
-      result.add(Article(id: ((page - 1) * 20) + i, title: 'Article no $i', content: 'Body of article no $i'));
+      int id = ((page - 1) * 20) + i;
+
+      result.add(Article(id: id, title: 'Article no $id', content: 'Body of article no $id'));
     }
     
+    await Future.delayed(Duration(milliseconds: 500));
+
     return Future<List<Article>>.value(result);
   }
 }
