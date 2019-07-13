@@ -26,12 +26,12 @@ class ArticlesFetched extends ArticleState {
       : super([articles, currentPage, itemsNumber, isLastPage]);
 
   ArticlesFetched copyState(
-      {List<Article> arts, int currentPg, int itemsNum, bool isLpage}) {
+      {List<Article> arts, int currentPg, int itemsNum, bool isLastPage}) {
     return ArticlesFetched(
         articles: arts ?? this.articles,
         currentPage: currentPg ?? this.currentPage,
         itemsNumber: itemsNum ?? this.itemsNumber,
-        isLastPage: isLpage ?? this.isLastPage);
+        isLastPage: isLastPage ?? this.isLastPage);
   }
 
   @override

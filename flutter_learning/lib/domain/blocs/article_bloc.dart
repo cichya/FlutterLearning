@@ -45,7 +45,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
           final articles = await _fetchArticles(currentPage + 1);
 
           yield articles.isEmpty
-              ? (currentState as ArticlesFetched).copyState(isLpage: true)
+              ? (currentState as ArticlesFetched).copyState(isLastPage: true)
               : ArticlesFetched(
                   articles:
                       (currentState as ArticlesFetched).articles + articles,
