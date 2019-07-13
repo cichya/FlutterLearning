@@ -35,7 +35,6 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
           yield ArticlesFetched(
               articles: articles,
               currentPage: 1,
-              itemsNumber: articles.length,
               isLastPage: false);
         }
 
@@ -50,7 +49,6 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
                   articles:
                       (currentState as ArticlesFetched).articles + articles,
                   currentPage: currentPage + 1,
-                  itemsNumber: (currentPage + 1 * 20),
                   isLastPage: false);
         }
       } catch (_) {

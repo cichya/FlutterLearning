@@ -18,23 +18,21 @@ class ArticleError extends ArticleState {
 class ArticlesFetched extends ArticleState {
   final List<Article> articles;
   final int currentPage;
-  final int itemsNumber;
   final bool isLastPage;
 
   ArticlesFetched(
-      {this.articles, this.currentPage, this.itemsNumber, this.isLastPage})
-      : super([articles, currentPage, itemsNumber, isLastPage]);
+      {this.articles, this.currentPage, this.isLastPage})
+      : super([articles, currentPage, isLastPage]);
 
   ArticlesFetched copyState(
       {List<Article> arts, int currentPg, int itemsNum, bool isLastPage}) {
     return ArticlesFetched(
         articles: arts ?? this.articles,
         currentPage: currentPg ?? this.currentPage,
-        itemsNumber: itemsNum ?? this.itemsNumber,
         isLastPage: isLastPage ?? this.isLastPage);
   }
 
   @override
   toString() =>
-      'ArticlesFetched (articles: ${articles.length}, currentPage: $currentPage, itemsNumber: $itemsNumber, isLastPage: $isLastPage)';
+      'ArticlesFetched (articles: ${articles.length}, currentPage: $currentPage, isLastPage: $isLastPage)';
 }
