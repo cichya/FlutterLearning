@@ -9,7 +9,9 @@ class DataProvider {
     var list = new List<int>.generate(20, (i) => i + 1);
 
     for(var i in list) {
-      result.add(Article(id: ((page - 1) * 20) + i, title: 'Article no $i', content: 'Body of article no $i'));
+      int id = ((page - 1) * 20) + i;
+
+      result.add(Article(id: id, title: 'Article no $id', content: 'Body of article no $id'));
     }
     
     await Future.delayed(Duration(milliseconds: 500));
