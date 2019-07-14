@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning/data/datasources/data_provider.dart';
 import 'package:flutter_learning/data/repositories/article_repository.dart';
-import 'package:flutter_learning/domain/blocs/article_delegate.dart';
 import 'package:flutter_learning/domain/blocs/bloc.dart';
 import 'package:flutter_learning/presentation/pages/home_page.dart';
 

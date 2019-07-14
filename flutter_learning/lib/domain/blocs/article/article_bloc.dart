@@ -3,7 +3,7 @@ import 'package:flutter_learning/data/repositories/article_repository.dart';
 import 'package:flutter_learning/domain/models/article.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'bloc.dart';
+import '../bloc.dart';
 
 class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
   final ArticleRepository _articleRepository;
