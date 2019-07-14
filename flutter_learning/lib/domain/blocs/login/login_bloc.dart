@@ -1,13 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_learning/data/repositories/authentication_repository.dart';
+import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
 import 'package:flutter_learning/domain/blocs/login/login_event.dart';
 import 'package:flutter_learning/domain/blocs/login/login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationRepository _authenticationRepository;
-  final LoginBloc loginBloc;
+  final AuthenticationBloc authenticationBloc;
 
-  LoginBloc(this._authenticationRepository, this.loginBloc);
+  LoginBloc(this._authenticationRepository, this.authenticationBloc);
 
   @override
   LoginState get initialState => LoginInitial();
@@ -22,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             ._authenticationRepository
             .login(userName: event.userName, password: event.password);
 
-        this.loginBloc.dispatch(LoggedIn(token: token));
+        authenticationBloc.dispatch(LoggedIn(token: token));
 
         yield LoginInitial();
       } catch (error) {
