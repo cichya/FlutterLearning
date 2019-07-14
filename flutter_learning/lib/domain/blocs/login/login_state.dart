@@ -5,9 +5,9 @@ class LoginState extends Equatable {
   LoginState([List properties = const[]]) : super(properties);
 }
 
-class LoginUninitialized extends LoginState {
+class LoginInitial extends LoginState {
   @override
-  String toString() => 'LoginUninitialized';
+  String toString() => 'LoginInitial';
 }
 
 class LoginLoading extends LoginState {
