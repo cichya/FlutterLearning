@@ -14,12 +14,12 @@ class AuthenticationAuthenticated extends AuthenticationState {
   String toString() => 'AuthenticationAuthenticated';
 }
 
-class AuthenticateUnauthenticated extends AuthenticationState {
+class AuthenticationUnauthenticated extends AuthenticationState {
   @override
-  String toString() => 'AuthenticateUnauthenticated';
+  String toString() => 'AuthenticationUnauthenticated';
 }
 
-class AuthenticateLoading extends AuthenticationState {
+class AuthenticationLoading extends AuthenticationState {
   @override
-  String toString() => 'AuthenticateLoading';
+  String toString() => 'AuthenticationLoading';
 }
