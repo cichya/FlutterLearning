@@ -6,7 +6,8 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository _authenticationRepository;
 
-  AuthenticationBloc(this._authenticationRepository);
+  AuthenticationBloc(this._authenticationRepository)
+      : assert(_authenticationRepository != null);
 
   @override
   AuthenticationState get initialState => AuthenticationUninitialized();

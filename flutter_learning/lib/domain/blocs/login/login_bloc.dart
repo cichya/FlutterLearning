@@ -8,7 +8,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthenticationRepository _authenticationRepository;
   final AuthenticationBloc authenticationBloc;
 
-  LoginBloc(this._authenticationRepository, this.authenticationBloc);
+  LoginBloc(this._authenticationRepository, this.authenticationBloc)
+      : assert(_authenticationRepository != null),
+        assert(authenticationBloc != null);
 
   @override
   LoginState get initialState => LoginInitial();
