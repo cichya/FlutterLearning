@@ -14,6 +14,6 @@ class AuthenticationRepository {
   }
 
   Future<bool> hasToken() async {
-    return await Future<bool>.value(true);
+    return await Future<bool>.value(false);
   }
 }
