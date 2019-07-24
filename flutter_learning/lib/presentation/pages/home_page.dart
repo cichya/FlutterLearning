@@ -7,9 +7,9 @@ import 'package:flutter_learning/presentation/widgets/article.dart';
 import 'package:flutter_learning/presentation/widgets/bottom_loader.dart';
 
 class HomePage extends StatefulWidget {
-  final ArticleRepository _articleRepository;
+  final ArticleBloc _articleBloc;
 
-  HomePage(this._articleRepository);
+  HomePage(this._articleBloc);
 
   @override
   State<StatefulWidget> createState() {
@@ -26,8 +26,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    //_articleBloc = BlocProvider.of<ArticleBloc>(context);
-    _articleBloc = ArticleBloc(widget._articleRepository);
+    _articleBloc = this.widget._articleBloc;
   }
 
   @override

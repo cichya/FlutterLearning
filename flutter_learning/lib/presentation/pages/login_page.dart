@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_learning/data/repositories/authentication_repository.dart';
+import 'package:flutter_learning/domain/blocs/authentication/authentication_bloc.dart';
 import 'package:flutter_learning/domain/blocs/login/login.dart';
 
 class LoginPage extends StatefulWidget {
+  final LoginBloc _loginBloc;
+
+  LoginPage(this._loginBloc);
+
   @override
   State<StatefulWidget> createState() {
     return _LoginPageState();
@@ -15,10 +21,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _loginBloc = BlocProvider.of<LoginBloc>(context);
-
     _onLoginButtonPressed() {
-      _loginBloc.dispatch(Login(
+      this.widget._loginBloc.dispatch(Login(
           userName: _formData['username'], password: _formData['password']));
     }
 

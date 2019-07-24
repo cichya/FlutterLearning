@@ -7,6 +7,8 @@ import 'package:flutter_learning/data/repositories/authentication_repository.dar
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
 import 'package:flutter_learning/domain/blocs/bloc_delegate.dart';
+import 'package:flutter_learning/domain/blocs/login/login.dart';
+import 'package:flutter_learning/domain/models/article.dart';
 import 'package:flutter_learning/presentation/pages/home_page.dart';
 import 'package:flutter_learning/presentation/pages/login_page.dart';
 import 'package:flutter_learning/presentation/pages/splash_page.dart';
@@ -22,22 +24,49 @@ void main() {
 
   final ArticleRepository articleRepository = ArticleRepository(dataProvider);
 
+  final AuthenticationBloc _authenticationBloc =
+      AuthenticationBloc(authenticationRepository);
+
+  final LoginBloc _loginBloc =
+      LoginBloc(authenticationRepository, _authenticationBloc);
+
+  final ArticleBloc _articleBloc = ArticleBloc(articleRepository);
+
   runApp(
-    BlocProvider<AuthenticationBloc>(
-      builder: (BuildContext context) {
-        return AuthenticationBloc(authenticationRepository)
-          ..dispatch(AppStarted());
-      },
-      child: MyApp(articleRepository: articleRepository),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          builder: (BuildContext context) {
+            return _authenticationBloc..dispatch(AppStarted());
+          },
+        ),
+        BlocProvider<LoginBloc>(
+          builder: (BuildContext context) =>
+              LoginBloc(authenticationRepository, _authenticationBloc),
+        )
+      ],
+      child: MyApp(
+        authenticationBloc: _authenticationBloc,
+        loginBloc: _loginBloc,
+        articleBloc: _articleBloc,
+      ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  final ArticleRepository articleRepository;
+  final AuthenticationBloc authenticationBloc;
+  final LoginBloc loginBloc;
+  final ArticleBloc articleBloc;
 
-  MyApp({Key key, @required this.articleRepository})
-      : assert(articleRepository != null),
+  MyApp(
+      {Key key,
+      @required this.authenticationBloc,
+      @required this.loginBloc,
+      @required this.articleBloc})
+      : assert(authenticationBloc != null),
+        assert(loginBloc != null),
+        assert(articleBloc != null),
         super(key: key);
 
   @override
@@ -55,7 +84,7 @@ class MyApp extends StatelessWidget {
           }
 
           if (state is AuthenticationAuthenticated) {
-            return HomePage(articleRepository);
+            return HomePage(articleBloc);
           }
 
           if (state is AuthenticationLoading) {
@@ -63,7 +92,7 @@ class MyApp extends StatelessWidget {
           }
 
           if (state is AuthenticationUnauthenticated) {
-            return LoginPage();
+            return LoginPage(loginBloc);
           }
         },
       ),
