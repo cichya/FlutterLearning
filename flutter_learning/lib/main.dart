@@ -78,20 +78,15 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
         bloc: BlocProvider.of<AuthenticationBloc>(context),
         builder: (BuildContext context, AuthenticationState state) {
-          if (state is AuthenticationUninitialized) {
-            return SplashPage();
-          }
-
-          if (state is AuthenticationAuthenticated) {
-            return HomePage(articleBloc);
-          }
-
-          if (state is AuthenticationLoading) {
-            return LoginIndicator();
-          }
-
-          if (state is AuthenticationUnauthenticated) {
-            return LoginPage(loginBloc);
+          switch(state.runtimeType) {
+            case AuthenticationUninitialized:
+              return SplashPage();
+            case AuthenticationAuthenticated:
+              return HomePage(articleBloc);
+            case AuthenticationLoading:
+              return LoginIndicator();
+            case AuthenticationUnauthenticated:
+              return LoginPage(loginBloc);
           }
         },
       ),
