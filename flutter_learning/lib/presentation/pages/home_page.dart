@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learning/data/datasources/data_provider.dart';
-import 'package:flutter_learning/data/repositories/article_repository.dart';
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning/presentation/widgets/article.dart';

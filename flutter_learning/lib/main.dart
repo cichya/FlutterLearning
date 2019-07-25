@@ -8,7 +8,6 @@ import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
 import 'package:flutter_learning/domain/blocs/bloc_delegate.dart';
 import 'package:flutter_learning/domain/blocs/login/login.dart';
-import 'package:flutter_learning/domain/models/article.dart';
 import 'package:flutter_learning/presentation/pages/home_page.dart';
 import 'package:flutter_learning/presentation/pages/login_page.dart';
 import 'package:flutter_learning/presentation/pages/splash_page.dart';
