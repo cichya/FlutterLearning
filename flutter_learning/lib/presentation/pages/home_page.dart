@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
 import 'package:flutter_learning/presentation/widgets/article.dart';
 import 'package:flutter_learning/presentation/widgets/bottom_loader.dart';
 
 class HomePage extends StatefulWidget {
   final ArticleBloc _articleBloc;
+  final AuthenticationBloc _authenticationBloc;
 
-  HomePage(this._articleBloc);
+  HomePage(this._articleBloc, this._authenticationBloc);
 
   @override
   State<StatefulWidget> createState() {
@@ -19,12 +21,14 @@ class _HomePageState extends State<HomePage> {
   final _scrollController = ScrollController();
   final _scrollTreshold = 200.0;
   ArticleBloc _articleBloc;
+  AuthenticationBloc _authenticationBloc;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
     _articleBloc = this.widget._articleBloc;
+    _authenticationBloc = this.widget._authenticationBloc;
   }
 
   @override
@@ -33,9 +37,21 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Articles'),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text('Log out'),
+              trailing: Icon(Icons.power_settings_new),
+              onTap: () => {
+                _authenticationBloc.dispatch(LoggedOut())
+              },
+            )
+          ],
+        ),
+      ),
       body: BlocProvider(
-        builder: (context) => _articleBloc
-          ..dispatch(FetchArticles()),
+        builder: (context) => _articleBloc..dispatch(FetchArticles()),
         child: BlocBuilder<ArticleEvent, ArticleState>(
           bloc: _articleBloc,
           builder: (BuildContext context, ArticleState state) {

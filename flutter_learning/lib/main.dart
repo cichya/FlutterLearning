@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
             case AuthenticationUninitialized:
               return SplashPage();
             case AuthenticationAuthenticated:
-              return HomePage(articleBloc);
+              return HomePage(articleBloc, authenticationBloc);
             case AuthenticationLoading:
               return LoginIndicator();
             case AuthenticationUnauthenticated:
