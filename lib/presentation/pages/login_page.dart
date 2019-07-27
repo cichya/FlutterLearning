@@ -19,8 +19,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     _onLoginButtonPressed() {
-      this.widget._loginBloc.dispatch(Login(
-          userName: _formData['username'], password: _formData['password']));
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+        this.widget._loginBloc.dispatch(Login(
+            userName: _formData['username'], password: _formData['password']));
+      }
     }
 
     return Scaffold(
@@ -43,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (value.isEmpty) {
                       return 'Please enter a your user name';
                     }
+                    return null;
                   },
                   onSaved: (String value) {
                     _formData['username'] = value;
@@ -58,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (value.isEmpty) {
                       return 'Please enter your password';
                     }
+                    return null;
                   },
                   onSaved: (String value) {
                     _formData['password'] = value;
