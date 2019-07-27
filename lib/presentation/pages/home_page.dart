@@ -36,6 +36,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Articles'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.folder_special),
+            onPressed: () => {},
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -43,9 +49,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Log out'),
               trailing: Icon(Icons.power_settings_new),
-              onTap: () => {
-                _authenticationBloc.dispatch(LoggedOut())
-              },
+              onTap: () => {_authenticationBloc.dispatch(LoggedOut())},
             )
           ],
         ),
