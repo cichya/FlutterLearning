@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
+import 'package:flutter_learning/presentation/pages/favorites_page.dart';
 import 'package:flutter_learning/presentation/widgets/article.dart';
 import 'package:flutter_learning/presentation/widgets/bottom_loader.dart';
 
@@ -39,7 +40,9 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.folder_special),
-            onPressed: () => {},
+            onPressed: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesPage()))
+            },
           ),
         ],
       ),
