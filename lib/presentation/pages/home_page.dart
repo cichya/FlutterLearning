@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
+import 'package:flutter_learning/domain/blocs/favorite/bloc.dart';
 import 'package:flutter_learning/presentation/pages/favorites_page.dart';
 import 'package:flutter_learning/presentation/widgets/article.dart';
 import 'package:flutter_learning/presentation/widgets/bottom_loader.dart';
@@ -9,8 +10,9 @@ import 'package:flutter_learning/presentation/widgets/bottom_loader.dart';
 class HomePage extends StatefulWidget {
   final ArticleBloc _articleBloc;
   final AuthenticationBloc _authenticationBloc;
+  final FavoriteBloc _favoriteBloc;
 
-  HomePage(this._articleBloc, this._authenticationBloc);
+  HomePage(this._articleBloc, this._authenticationBloc, this._favoriteBloc);
 
   @override
   State<StatefulWidget> createState() {
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   final _scrollTreshold = 200.0;
   ArticleBloc _articleBloc;
   AuthenticationBloc _authenticationBloc;
+  FavoriteBloc _favoriteBloc;
 
   @override
   void initState() {
@@ -30,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     _scrollController.addListener(_onScroll);
     _articleBloc = this.widget._articleBloc;
     _authenticationBloc = this.widget._authenticationBloc;
+    _favoriteBloc = this.widget._favoriteBloc;
   }
 
   @override
@@ -41,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.folder_special),
             onPressed: () => {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesPage()))
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesPage(_favoriteBloc)))
             },
           ),
         ],

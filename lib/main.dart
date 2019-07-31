@@ -7,6 +7,7 @@ import 'package:flutter_learning/data/repositories/authentication_repository.dar
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
 import 'package:flutter_learning/domain/blocs/bloc_delegate.dart';
+import 'package:flutter_learning/domain/blocs/favorite/favorite_bloc.dart';
 import 'package:flutter_learning/domain/blocs/login/login.dart';
 import 'package:flutter_learning/presentation/pages/home_page.dart';
 import 'package:flutter_learning/presentation/pages/login_page.dart';
@@ -31,6 +32,8 @@ void main() {
 
   final ArticleBloc _articleBloc = ArticleBloc(articleRepository);
 
+  final FavoriteBloc _favoriteBloc = FavoriteBloc();
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -42,12 +45,16 @@ void main() {
         BlocProvider<LoginBloc>(
           builder: (BuildContext context) =>
               LoginBloc(authenticationRepository, _authenticationBloc),
+        ),
+        BlocProvider<FavoriteBloc>(
+          builder: (BuildContext context) => FavoriteBloc(),
         )
       ],
       child: MyApp(
         authenticationBloc: _authenticationBloc,
         loginBloc: _loginBloc,
         articleBloc: _articleBloc,
+        favoriteBloc: _favoriteBloc,
       ),
     ),
   );
@@ -57,15 +64,18 @@ class MyApp extends StatelessWidget {
   final AuthenticationBloc authenticationBloc;
   final LoginBloc loginBloc;
   final ArticleBloc articleBloc;
+  final FavoriteBloc favoriteBloc;
 
   MyApp(
       {Key key,
       @required this.authenticationBloc,
       @required this.loginBloc,
-      @required this.articleBloc})
+      @required this.articleBloc,
+      @required this.favoriteBloc})
       : assert(authenticationBloc != null),
         assert(loginBloc != null),
         assert(articleBloc != null),
+        assert(favoriteBloc != null),
         super(key: key);
 
   @override
@@ -78,11 +88,11 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
         bloc: BlocProvider.of<AuthenticationBloc>(context),
         builder: (BuildContext context, AuthenticationState state) {
-          switch(state.runtimeType) {
+          switch (state.runtimeType) {
             case AuthenticationUninitialized:
               return SplashPage();
             case AuthenticationAuthenticated:
-              return HomePage(articleBloc, authenticationBloc);
+              return HomePage(articleBloc, authenticationBloc, favoriteBloc);
             case AuthenticationLoading:
               return LoginIndicator();
             case AuthenticationUnauthenticated:
