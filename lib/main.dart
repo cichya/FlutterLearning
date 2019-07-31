@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_learning/data/datasources/data_provider.dart';
 import 'package:flutter_learning/data/repositories/article_repository.dart';
 import 'package:flutter_learning/data/repositories/authentication_repository.dart';
+import 'package:flutter_learning/data/repositories/favorite_repository.dart';
 import 'package:flutter_learning/domain/blocs/article/bloc.dart';
 import 'package:flutter_learning/domain/blocs/authentication/authentication.dart';
 import 'package:flutter_learning/domain/blocs/bloc_delegate.dart';
@@ -32,7 +33,9 @@ void main() {
 
   final ArticleBloc _articleBloc = ArticleBloc(articleRepository);
 
-  final FavoriteBloc _favoriteBloc = FavoriteBloc();
+  final FavoriteRepository _favoriteRepository = FavoriteRepository(dataProvider);
+
+  final FavoriteBloc _favoriteBloc = FavoriteBloc(_favoriteRepository);
 
   runApp(
     MultiBlocProvider(
@@ -47,7 +50,7 @@ void main() {
               LoginBloc(authenticationRepository, _authenticationBloc),
         ),
         BlocProvider<FavoriteBloc>(
-          builder: (BuildContext context) => FavoriteBloc(),
+          builder: (BuildContext context) => FavoriteBloc(_favoriteRepository),
         )
       ],
       child: MyApp(

@@ -18,4 +18,20 @@ class DataProvider {
 
     return Future<List<Article>>.value(result);
   }
+
+  Future<List<Article>> getFavoriteArticles() async {
+    List<Article> result = <Article>[
+      
+    ];
+
+    var list = new List<int>.generate(20, (i) => i + 1);
+
+    for(var i in list) {
+      result.add(Article(id: i, title: 'Article no $i', content: 'Body of article no $i'));
+    }
+    
+    await Future.delayed(Duration(milliseconds: 500));
+
+    return Future<List<Article>>.value(result);
+  }
 }
