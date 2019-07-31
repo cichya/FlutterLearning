@@ -1,7 +1,7 @@
 import 'package:flutter_learning/domain/models/article.dart';
 
 class DataProvider {
-  Future<List<Article>> articles(int page) async {
+  Future<List<Article>> getArticles(int page) async {
     List<Article> result = <Article>[
       
     ];
