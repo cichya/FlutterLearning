@@ -45,6 +45,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 itemBuilder: (BuildContext context, int index) {
                   return Dismissible(
                     key: Key(state.favoriteArticles[index].id.toString()),
+                    direction: DismissDirection.endToStart,
                     onDismissed: (DismissDirection direction) {
                       if (direction == DismissDirection.endToStart) {
                         print('Delete article');
